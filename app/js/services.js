@@ -6,7 +6,7 @@
 // Demonstrate how to register services
 // In this case it is a simple value service.
 angular.module('myApp.services', [])
-	.value('FIREBASE_URL', 'https://waitandeat-sohaib.firebaseio.com/')
+	.value('FIREBASE_URL', 'https://helloskills.firebaseio.com/')
 	.factory('dataService', function($firebase, FIREBASE_URL) {
 		var dataRef = new Firebase(FIREBASE_URL);
 		var fireData = $firebase(dataRef);
@@ -51,7 +51,7 @@ angular.module('myApp.services', [])
 
 	})
 	.factory('authService', function($firebaseSimpleLogin, $location,$rootScope, FIREBASE_URL, dataService) {
-		console.log("test1"); Parse.initialize("HQmgIBhPDlDtMAnFPqoxjBK02sNfSlBG4som8cQA","8gbgYeT1x46HszsfokCED4LllwCvbZUPOc6VKedy");
+		
 		var authRef = new Firebase(FIREBASE_URL);
 		var auth = $firebaseSimpleLogin(authRef);
 		var emails = dataService.$child('emails');
@@ -65,7 +65,7 @@ angular.module('myApp.services', [])
 				});
 
 			},
-			login: function(user) {
+			 login: function(user) {
 				/*console.log(user);
 						console.log(password);
 						Parse.User.logIn(user, "password", {
@@ -79,14 +79,14 @@ angular.module('myApp.services', [])
   							  console.log("failed");
   						}
 					});*/
-				console.log('password');
-				console.log(user.password);
+				//console.log('password');
+				//console.log(user.password);
 				auth.$login('password', user).then(function(data){
 				console.log(data);
 				//redirect to waitlist page
 				$location.path('/waitlist');
 			});
-			},
+			}, 
 			logout: function() {
 				auth.$logout();
 				$location.path('/');
