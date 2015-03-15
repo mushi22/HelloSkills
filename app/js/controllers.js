@@ -23,6 +23,9 @@ angular.module('myApp.controllers', [])
 			partyService.saveParty($scope.newParty, $scope.currentUser.id);
 			$scope.newParty = {name: '', phone: '', size: '', done: false, notified: 'No'};
 		};
+        
+        $scope.newStudio = {name: '', phone: '', size: '', done: false, notified: 'No'};
+
 
 		//Function to send text message to a party. 
 		$scope.sendTextMessage = function(party) {
