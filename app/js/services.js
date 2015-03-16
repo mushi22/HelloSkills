@@ -15,6 +15,8 @@ angular.module('myApp.services', [])
 	})
 	.factory('partyService', function(dataService) {
 		var users = dataService.$child('users');
+        var studios = dataService.$child('studios');
+        var classes = dataService.$child('class');
 
 		var partyServiceObject = {
 			saveParty: function(party, userId) {
@@ -23,7 +25,18 @@ angular.module('myApp.services', [])
 			},
 			getPartiesByUserId: function(userId){
 				return users.$child(userId).$child('parties');
-			}
+			},
+            saveStudio: function(party) {
+                studios.$add(party);
+            },
+            
+            saveClass: function(party) {
+                classes.$add(party);
+            },
+            
+            getStudios: function(){
+                return studios;
+            }
 		};
 
 		return partyServiceObject;
@@ -82,6 +95,8 @@ angular.module('myApp.services', [])
 				//console.log('password');
 				//console.log(user.password);
 				auth.$login('password', user).then(function(data){
+                console.log("just reached auth $login");
+
 				console.log(data);
 				//redirect to waitlist page
 				$location.path('/waitlist');

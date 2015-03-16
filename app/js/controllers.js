@@ -24,9 +24,26 @@ angular.module('myApp.controllers', [])
 			$scope.newParty = {name: '', phone: '', size: '', done: false, notified: 'No'};
 		};
         
-        $scope.newStudio = {name: '', phone: '', size: '', done: false, notified: 'No'};
+        //object to store from new Studio
+        $scope.newStudio = {studioname: '', email: '',phone:'', location: '', done: false, notified: 'No'};
+        
+        
+        $scope.saveStudio = function(){
+			partyService.saveStudio($scope.newStudio, $scope.currentUser.id);
+            $scope.newStudio = {studioname: '', email: '',phone:'', location: '', done: false, notified: 'No'};
+		};
+        
+        $scope.newClass = {className:'', InstructorName:'', timeOfClass:'',endOfClass:'',DateOfClass:'', DescOfClass:'',DanceType:'',DanceLevel:'',DancePrice:'',done:false, notified: 'No'};
+        
+        $scope.saveClass = function() {
+            partyService.saveClass($scope.newClass);
+            $scope.newClass = {className:'', InstructorName:'', timeOfClass:'',endOfClass:'',DateOfClass:'', DescOfClass:'',DanceType:'',DanceLevel:'',DancePrice:'',done:false, notified: 'No'};
+        };
 
-
+        //bind studios
+        $scope.allstudios = partyService.getStudios();
+        
+        
 		//Function to send text message to a party. 
 		$scope.sendTextMessage = function(party) {
 			textMessageService.sendTextMessage(party, $scope.currentUser.id);
@@ -45,7 +62,10 @@ angular.module('myApp.controllers', [])
 
 		//method to login user
 		$scope.login = function () {
+            console.log("reached login controller");
 			authService.login($scope.user);
+            console.log("after Auth controller");
+
 		};
 
 		//method to logout 
